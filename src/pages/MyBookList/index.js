@@ -13,7 +13,6 @@ export default () => {
   const {
     name,
     filteredBooks,
-    addBook,
     onChangeFilterStatus,
     filterStatus,
     onChangeSearch,
