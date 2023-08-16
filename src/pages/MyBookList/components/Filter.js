@@ -4,6 +4,7 @@ import { Dropdown } from "primereact/dropdown";
 
 import { InputText } from "primereact/inputtext";
 import statusOptions from "../constants/status.options";
+import content from "../constants/content";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
@@ -13,11 +14,11 @@ export default () => {
         <Dropdown
           value={statusOptions[0].value}
           options={statusOptions}
-          placeholder="Select a Status"
+          placeholder={content.filter.statusDropdown.placeHolderText}
         />
       </div>
       <div className="w-6 md:w-2 flex justify-content-end">
-        <InputText placeholder="Search" />
+        <InputText placeholder={content.filter.searchInput.placeHolderText} />
       </div>
     </div>
   );
