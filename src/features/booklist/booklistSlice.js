@@ -22,7 +22,8 @@ export const booklistSlice = createSlice({
       state.name = action.payload;
     },
     addBook: (state, action) => {
-      state.books.push({ id: uuidv4(), ...action.payload });
+      // add book to first index
+      state.books.unshift({ id: uuidv4(), ...action.payload });
     },
     removeBook: (state, action) => {
       state.books = state.books.filter((book) => book.id !== action.payload);

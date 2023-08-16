@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    notStarted: { severity: "info" , value: "Not Started" },
+    "not-started": { severity: "info" , value: "Not Started" },
     reading: { severity: "warning", value: "Reading" },
     done: { severity: "success", value: "Done" },
 }

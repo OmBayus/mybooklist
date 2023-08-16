@@ -3,7 +3,7 @@ import React from "react";
 import { Dropdown } from "primereact/dropdown";
 
 import { InputText } from "primereact/inputtext";
-import statusOptions from "../constants/status.options";
+import {filterStatusOptions} from "../constants/status.options";
 import content from "../constants/content";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -13,7 +13,7 @@ export default ({onChangeFilterStatus,filterStatus,onChangeSearch,searchText}) =
       <div className="text-500 w-6 md:w-2 font-medium">
         <Dropdown
           value={filterStatus}
-          options={statusOptions}
+          options={filterStatusOptions}
           placeholder={content.filter.statusDropdown.placeHolderText}
           onChange={onChangeFilterStatus}
         />
