@@ -1,18 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Header from "./components/Header";
 import Filter from "./components/Filter";
 import List from "./components/List";
+import useMyBookList from "./hooks/useMyBookList";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-  const booklist = useSelector((state) => state.booklist);
+  const {name,filteredBooks,addBook} = useMyBookList()
   return (
     <div>
-      <Header />
+      <Header name={name} addBook={addBook} />
       <div className="surface-0 p-4 shadow-2 border-round m-5">
         <Filter />
-        <List/>
+        <List books={filteredBooks}/>
       </div>
     </div>
   );
