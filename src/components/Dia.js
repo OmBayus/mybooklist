@@ -10,6 +10,9 @@ export default ({
   headerText,
   showFooter = true,
   loading=false,
+  showDia=true,
+  closable=false,
+  onHide=()=>{}
 
 }) => {
   const footerContent = (
@@ -26,10 +29,11 @@ export default ({
   return (
     <Dialog
       header={headerText}
-      visible={true}
+      visible={showDia}
       style={{ width: "50vw", padding: "10px" }}
       footer={showFooter && footerContent}
-      closable={false}
+      closable={closable}
+      onHide={onHide}
     >
       <div style={{ margin: "10px", padding: "10px" }}>{children}</div>
     </Dialog>
