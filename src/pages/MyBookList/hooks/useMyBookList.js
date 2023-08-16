@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSnackbar } from "notistack";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-const { booklistActions } = require("features/booklist/booklistSlice");
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-  const { enqueueSnackbar } = useSnackbar();
-  const dispatch = useDispatch();
   const booklist = useSelector((state) => state.booklist);
   const [filteredBooks, setFilteredBooks] = useState(booklist.books);
   const [filterStatus, setFilterStatus] = useState("all");
@@ -22,11 +17,6 @@ export default () => {
       return booklist.books;
     }
     return booklist.books.filter((book) => book.status === status);
-  };
-
-  const addBook = (book) => {
-    dispatch(booklistActions.addBook(book));
-    enqueueSnackbar("Book added", { variant: "success" });
   };
 
   const onChangeFilterStatus = (e) => {
@@ -52,7 +42,6 @@ export default () => {
     name: booklist.name,
     filteredBooks,
     onChangeFilterStatus,
-    addBook,
     filterStatus,
     onChangeSearch,
     searchText,
