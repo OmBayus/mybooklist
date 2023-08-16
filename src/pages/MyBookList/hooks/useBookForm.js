@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 const { booklistActions } = require("features/booklist/booklistSlice");
 
 const initialBook = {
+  id: "",
   name: "",
   author: "",
   rate: 1,
@@ -22,8 +23,14 @@ export default () => {
   const submit = (e) => {
     e.preventDefault();
     setLoading(true);
-    dispatch(booklistActions.addBook(book));
-    enqueueSnackbar("Book Added Successfully", { variant: "success" });
+    if(isEdit){
+      dispatch(booklistActions.updateBook(book));
+      enqueueSnackbar("Book Updated Successfully", { variant: "success" });
+    }
+    else{
+      dispatch(booklistActions.addBook(book));
+      enqueueSnackbar("Book Added Successfully", { variant: "success" });
+    }
     setLoading(false);
     onHide();
   };
@@ -37,6 +44,13 @@ export default () => {
     setBook(initialBook);
   };
 
+  const edit = (book) => {
+    setIsEdit(true);
+    setBook(book);
+    setShowDia(true);
+  };
+
+
   return {
     isEdit,
     book,
@@ -47,5 +61,6 @@ export default () => {
     showDia,
     setShowDia,
     onHide,
+    edit,
   };
 };

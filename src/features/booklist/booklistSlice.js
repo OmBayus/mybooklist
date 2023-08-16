@@ -7,14 +7,14 @@ export const booklistSlice = createSlice({
     name: "",
     books: [
       // example book data
-      {
-        id: 1,
-        name: "Book1",
-        author: "Author1",
-        rate: 3,
-        status: "reading",
-        review: "review",
-      },
+      // {
+      //   id: 1,
+      //   name: "Book1",
+      //   author: "Author1",
+      //   rate: 3,
+      //   status: "reading",
+      //   review: "review",
+      // },
     ],
   },
   reducers: {
@@ -23,7 +23,7 @@ export const booklistSlice = createSlice({
     },
     addBook: (state, action) => {
       // add book to first index
-      state.books.unshift({ id: uuidv4(), ...action.payload });
+      state.books.unshift({ ...action.payload,id: uuidv4() });
     },
     removeBook: (state, action) => {
       state.books = state.books.filter((book) => book.id !== action.payload);

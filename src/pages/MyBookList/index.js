@@ -20,7 +20,7 @@ export default () => {
     searchText,
   } = useMyBookList();
 
-  const { isEdit, loading, submit, book, onChangeForm, showDia, setShowDia,onHide } =
+  const { isEdit, loading, submit, book, onChangeForm, showDia, setShowDia,onHide,edit } =
     useBookForm();
   return (
     <div>
@@ -32,7 +32,7 @@ export default () => {
           onChangeSearch={onChangeSearch}
           searchText={searchText}
         />
-        <List books={filteredBooks} />
+        <List books={filteredBooks} edit={edit} />
       </div>
       <Dia
         showDia={showDia}
