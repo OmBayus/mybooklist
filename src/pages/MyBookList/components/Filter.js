@@ -7,7 +7,7 @@ import statusOptions from "../constants/status.options";
 import content from "../constants/content";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ({onChangeFilterStatus,filterStatus}) => {
+export default ({onChangeFilterStatus,filterStatus,onChangeSearch,searchText}) => {
   return (
     <div className="flex align-items-center justify-content-between py-3 px-5 flex-wrap">
       <div className="text-500 w-6 md:w-2 font-medium">
@@ -19,7 +19,7 @@ export default ({onChangeFilterStatus,filterStatus}) => {
         />
       </div>
       <div className="w-6 md:w-2 flex justify-content-end">
-        <InputText placeholder={content.filter.searchInput.placeHolderText} />
+        <InputText value={searchText} onChange={onChangeSearch} placeholder={content.filter.searchInput.placeHolderText} />
       </div>
     </div>
   );

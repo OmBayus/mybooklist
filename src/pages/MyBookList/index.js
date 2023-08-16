@@ -6,7 +6,7 @@ import useMyBookList from "./hooks/useMyBookList";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-  const { name, filteredBooks, addBook, onChangeFilterStatus, filterStatus } =
+  const { name, filteredBooks, addBook, onChangeFilterStatus, filterStatus,onChangeSearch,searchText } =
     useMyBookList();
   return (
     <div>
@@ -15,6 +15,8 @@ export default () => {
         <Filter
           filterStatus={filterStatus}
           onChangeFilterStatus={onChangeFilterStatus}
+          onChangeSearch={onChangeSearch}
+          searchText={searchText}
         />
         <List books={filteredBooks} />
       </div>
