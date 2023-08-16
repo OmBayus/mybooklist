@@ -50,6 +50,11 @@ export default () => {
     setShowDia(true);
   };
 
+  const addBook = () => {
+    setIsEdit(false);
+    setShowDia(true);
+  };
+
 
   return {
     isEdit,
@@ -59,8 +64,8 @@ export default () => {
     submit,
     onChangeForm,
     showDia,
-    setShowDia,
     onHide,
     edit,
+    addBook
   };
 };

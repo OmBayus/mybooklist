@@ -19,11 +19,11 @@ export default () => {
     searchText,
   } = useMyBookList();
 
-  const { isEdit, loading, submit, book, onChangeForm, showDia, setShowDia,onHide,edit } =
+  const { isEdit, loading, submit, book, onChangeForm, showDia,onHide,edit,addBook } =
     useBookForm();
   return (
     <div>
-      <Header name={name} addBook={()=>setShowDia(true)} />
+      <Header name={name} addBook={addBook} />
       <div className="surface-0 p-4 shadow-2 border-round m-5">
         <Filter
           filterStatus={filterStatus}
