@@ -11,6 +11,9 @@ import "primereact/resources/primereact.min.css";
 //icons
 import "primeicons/primeicons.css";
 
+//primeflex
+import "primeflex/primeflex.css";
+
 // App
 import App from "./App";
 
