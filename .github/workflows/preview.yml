@@ -1,8 +1,9 @@
-name: 'Netlify Preview Deploy'
+name: 'Netlify Previews'
 
 on:
-  pull_request:
-    types: ['opened', 'edited', 'synchronize']
+  push:
+    branches-ignore: 
+      - master
 
 jobs:
   deploy:
@@ -11,7 +12,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: jsmrcaga/action-netlify-deploy@v2.0.0
+
+      # Sets the branch name as environment variable
+      - uses: nelonoel/branch-name@v1.0.1
+      - uses: jsmrcaga/action-netlify-deploy@master
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          deploy_alias: ${{ env.BRANCH_NAME }}
+      
+      # Creates a status check with link to preview
+      - name: Status check
+        uses: Sibz/github-status-action@v1.1.1
+        with:
+          authToken: ${{ secrets.GITHUB_TOKEN }}
+          context: Netlify preview
+          state: success
+          target_url: ${{ env.NETLIFY_PREVIEW_URL }}
