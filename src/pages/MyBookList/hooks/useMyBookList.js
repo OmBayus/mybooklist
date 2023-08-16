@@ -10,6 +10,7 @@ export default () => {
   const dispatch = useDispatch();
   const booklist = useSelector((state) => state.booklist);
   const [filteredBooks, setFilteredBooks] = useState(booklist.books);
+  const [filterStatus, setFilterStatus] = useState("all");
 
   useEffect(() => {
     setFilteredBooks(booklist.books);
@@ -24,5 +25,15 @@ export default () => {
     enqueueSnackbar("Book added", { variant: "success" });
   };
 
-  return { name: booklist.name, filteredBooks, filter, addBook };
+  const onChangeFilterStatus = (e) => {
+    setFilterStatus(e.value);
+    if (e.value === "all") {
+      setFilteredBooks(booklist.books);
+      return
+    }
+      
+    filter(e.value)
+  }
+
+  return { name: booklist.name, filteredBooks, onChangeFilterStatus, addBook,filterStatus };
 };
