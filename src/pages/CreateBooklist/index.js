@@ -6,10 +6,10 @@ import content from "./constants/content";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-  const { name, onChange,submit,loading } = useCreateBooklist();
+  const { name, onChange, submit, loading } = useCreateBooklist();
   return (
     <Dia
-    submit={submit}
+      submit={submit}
       headerText={content.dialog.header}
       submitLabel={content.dialog.submitLabel}
       loading={loading}

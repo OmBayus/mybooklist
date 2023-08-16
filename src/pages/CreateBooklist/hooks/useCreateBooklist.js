@@ -14,7 +14,6 @@ export default () => {
     }
     const submit = () => {
         setLoading(true);
-        localStorage.setItem("booklist-name",name);
         dispatch(booklistActions.setName(name));
         enqueueSnackbar("Booklist created successfully!", { variant: "success" });
         setLoading(false);
