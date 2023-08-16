@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import store from "app/store";
 import { Provider } from "react-redux";
@@ -13,6 +13,7 @@ import "primeicons/primeicons.css";
 
 // App
 import App from "./App";
+import LoadingScreen from "pages/LoadingScreen";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -20,7 +21,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Suspense fallback={<LoadingScreen/>}>
+        <App />
+      </Suspense>
     </Provider>
   </React.StrictMode>
 );
