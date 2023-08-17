@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
+import { confirmPopup } from "primereact/confirmpopup";
 const { booklistActions } = require("features/booklist/booklistSlice");
 
 const initialBook = {
@@ -23,11 +24,10 @@ export default () => {
   const submit = (e) => {
     e.preventDefault();
     setLoading(true);
-    if(isEdit){
+    if (isEdit) {
       dispatch(booklistActions.updateBook(book));
       enqueueSnackbar("Book Updated Successfully", { variant: "success" });
-    }
-    else{
+    } else {
       dispatch(booklistActions.addBook(book));
       enqueueSnackbar("Book Added Successfully", { variant: "success" });
     }
@@ -55,6 +55,17 @@ export default () => {
     setShowDia(true);
   };
 
+  const deleteBook = (e, id) => {
+    confirmPopup({
+      target: e.currentTarget,
+      message: "Are you sure you want to proceed?",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => {
+        dispatch(booklistActions.deleteBook(id));
+        enqueueSnackbar("Book Deleted Successfully", { variant: "success" });
+      },
+    });
+  };
 
   return {
     isEdit,
@@ -66,6 +77,7 @@ export default () => {
     showDia,
     onHide,
     edit,
-    addBook
+    addBook,
+    deleteBook,
   };
 };

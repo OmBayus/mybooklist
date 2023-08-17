@@ -14,6 +14,7 @@ export const booklistSlice = createSlice({
       //   rate: 3,
       //   status: "reading",
       //   review: "review",
+      //   isDeleted: false,
       // },
     ],
   },
@@ -23,7 +24,11 @@ export const booklistSlice = createSlice({
     },
     addBook: (state, action) => {
       // add book to first index
-      state.books.unshift({ ...action.payload,id: uuidv4() });
+      state.books.unshift({
+        ...action.payload,
+        id: uuidv4(),
+        isDeleted: false,
+      });
     },
     removeBook: (state, action) => {
       state.books = state.books.filter((book) => book.id !== action.payload);
@@ -32,6 +37,14 @@ export const booklistSlice = createSlice({
       state.books = state.books.map((book) => {
         if (book.id === action.payload.id) {
           return action.payload;
+        }
+        return book;
+      });
+    },
+    deleteBook: (state, action) => {
+      state.books = state.books.map((book) => {
+        if (book.id === action.payload) {
+          book.isDeleted = true;
         }
         return book;
       });

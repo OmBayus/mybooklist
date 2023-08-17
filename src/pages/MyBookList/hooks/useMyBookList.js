@@ -40,7 +40,7 @@ export default () => {
 
   return {
     name: booklist.name,
-    filteredBooks,
+    filteredBooks: filteredBooks.filter((book) => !book.isDeleted),
     onChangeFilterStatus,
     filterStatus,
     onChangeSearch,
