@@ -16,18 +16,23 @@ import "primeflex/primeflex.css";
 
 // App
 import App from "./App";
+
 import LoadingScreen from "pages/LoadingScreen";
+import ErrorBoundary from "components/ErrorBoundary";
+import ErrorPage from "pages/ErrorPage";
 
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Suspense fallback={<LoadingScreen/>}>
-        <App />
-      </Suspense>
-    </Provider>
+    <ErrorBoundary fallback={<ErrorPage/>}>
+      <Provider store={store}>
+        <Suspense fallback={<LoadingScreen />}>
+          <App />
+        </Suspense>
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 
