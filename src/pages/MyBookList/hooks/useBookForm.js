@@ -8,7 +8,7 @@ const initialBook = {
   name: "",
   author: "",
   rate: 1,
-  status: "",
+  status: "not-started",
   review: "",
 };
 
