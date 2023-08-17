@@ -36,19 +36,6 @@ export default ({ book, onChangeForm }) => {
           value={book.author}
         />
 
-        <label htmlFor="rate" className="block text-900 font-medium mb-2">
-          Rate
-        </label>
-        <div className="my-4">
-          <Rating
-            value={book.rate}
-            onChange={(e) =>
-              onChangeForm({ target: { name: "rate", value: e.value } })
-            }
-            cancel={false}
-          />
-        </div>
-
         <label htmlFor="status" className="block text-900 font-medium mb-2">
           Status
         </label>
@@ -62,19 +49,34 @@ export default ({ book, onChangeForm }) => {
           }
           value={book.status}
         />
-        <label htmlFor="review" className="block text-900 font-medium mb-2">
-          Review
-        </label>
-        <InputTextarea
-          id="review"
-          type="text"
-          placeholder="Review"
-          className="w-full mb-3"
-          onChange={(e) =>
-            onChangeForm({ target: { name: "review", value: e.value } })
-          }
-          value={book.review}
-        />
+
+        {book.status === "done" && <>
+          <label htmlFor="rate" className="block text-900 font-medium mb-2">
+            Rate
+          </label>
+          <div className="my-4">
+            <Rating
+              value={book.rate}
+              onChange={(e) =>
+                onChangeForm({ target: { name: "rate", value: e.value } })
+              }
+              cancel={false}
+            />
+          </div>
+          <label htmlFor="review" className="block text-900 font-medium mb-2">
+            Review
+          </label>
+          <InputTextarea
+            id="review"
+            type="text"
+            placeholder="Review"
+            className="w-full mb-3"
+            onChange={(e) =>
+              onChangeForm({ target: { name: "review", value: e.value } })
+            }
+            value={book.review}
+          />
+        </>}
       </div>
     </div>
   );
