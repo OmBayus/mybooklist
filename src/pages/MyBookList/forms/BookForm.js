@@ -68,12 +68,11 @@ export default ({ book, onChangeForm }) => {
           </label>
           <InputTextarea
             id="review"
+            name="review"
             type="text"
             placeholder="Review"
             className="w-full mb-3"
-            onChange={(e) =>
-              onChangeForm({ target: { name: "review", value: e.value } })
-            }
+            onChange={onChangeForm}
             value={book.review}
           />
         </>}
