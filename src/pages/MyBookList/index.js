@@ -1,4 +1,5 @@
 import React from "react";
+import { ConfirmPopup } from 'primereact/confirmpopup';
 import Header from "./components/Header";
 import Filter from "./components/Filter";
 import List from "./components/List";
@@ -19,10 +20,11 @@ export default () => {
     searchText,
   } = useMyBookList();
 
-  const { isEdit, loading, submit, book, onChangeForm, showDia,onHide,edit,addBook } =
+  const { isEdit, loading, submit, book, onChangeForm, showDia,onHide,edit,addBook,deleteBook } =
     useBookForm();
   return (
     <div>
+      <ConfirmPopup />
       <Header name={name} addBook={addBook} />
       <div className="surface-0 p-4 shadow-2 border-round m-5">
         <Filter
@@ -31,7 +33,7 @@ export default () => {
           onChangeSearch={onChangeSearch}
           searchText={searchText}
         />
-        <List books={filteredBooks} edit={edit} />
+        <List books={filteredBooks} edit={edit} deleteBook={deleteBook} />
       </div>
       <Dia
         showDia={showDia}
