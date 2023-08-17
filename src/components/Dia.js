@@ -30,10 +30,10 @@ export default ({
     <Dialog
       header={headerText}
       visible={showDia}
-      style={{ width: "50vw", padding: "10px" }}
       footer={showFooter && footerContent}
       closable={closable}
       onHide={onHide}
+      className="w-11 md:w-6"
     >
       <div style={{ margin: "10px", padding: "10px" }}>{children}</div>
     </Dialog>

@@ -14,6 +14,6 @@ export default {
     dialog:{
         header: (isEdit) => isEdit ? "Edit Book" : "Add Book",
         submitLabel: (isEdit) => isEdit ? "Edit" : "Add",
-    }
+    },
   };
   
