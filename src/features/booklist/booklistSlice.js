@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 
 export const booklistSlice = createSlice({
   name: "booklist",
@@ -8,7 +7,7 @@ export const booklistSlice = createSlice({
     books: [
       // example book data
       // {
-      //   id: 1,
+      //   id: "1",
       //   name: "Book1",
       //   author: "Author1",
       //   rate: 3,
@@ -19,6 +18,9 @@ export const booklistSlice = createSlice({
     ],
   },
   reducers: {
+    setBooks: (state, action) => {
+      state.books = action.payload.books;
+    },
     setName: (state, action) => {
       state.name = action.payload;
     },
@@ -26,12 +28,8 @@ export const booklistSlice = createSlice({
       // add book to first index
       state.books.unshift({
         ...action.payload,
-        id: uuidv4(),
         isDeleted: false,
       });
-    },
-    removeBook: (state, action) => {
-      state.books = state.books.filter((book) => book.id !== action.payload);
     },
     updateBook: (state, action) => {
       state.books = state.books.map((book) => {
@@ -43,7 +41,7 @@ export const booklistSlice = createSlice({
     },
     deleteBook: (state, action) => {
       state.books = state.books.map((book) => {
-        if (book.id === action.payload) {
+        if (book.id === action.payload.id) {
           book.isDeleted = true;
         }
         return book;

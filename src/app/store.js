@@ -1,14 +1,33 @@
 import { configureStore } from "@reduxjs/toolkit";
 import booklistSlice from "features/booklist/booklistSlice";
+import historySlice,{historyActions} from "features/history/historySlice";
 
 //MIDDLEWARE
-const localStorageMiddleware = ({ getState }) => {
-  return (next) => (action) => {
-    const result = next(action);
-    localStorage.setItem("applicationState", JSON.stringify(getState()));
-    return result;
-  };
+const middleware = (store) => (next) => (action) => {
+  const result = next(action);
+  localStorageMiddleware(store);
+  historyMiddleware(store,action)
+  return result;
 };
+
+const localStorageMiddleware = (store) => {
+  localStorage.setItem("applicationState", JSON.stringify(store.getState()));
+};
+
+const historyMiddleware = (store,action) => {
+  if(action.type.startsWith("booklist/")){
+    if(action.type === "booklist/setBooks" || action.type === "booklist/setName"){
+      store.dispatch(historyActions.set(store.getState().booklist));
+      return;
+    }
+    const history = {
+      action: action,
+      data: store.getState().history.present.books.find((book) => book.id === action.payload.id),
+    };
+    store.dispatch(historyActions.set(store.getState().booklist));
+    store.dispatch(historyActions.add(history));
+  }
+}
 
 const reHydrateStore = () => {
   if (localStorage.getItem("applicationState") !== null) {
@@ -16,13 +35,12 @@ const reHydrateStore = () => {
   }
 };
 
-
 export default configureStore({
   reducer: {
     booklist: booklistSlice,
+    history: historySlice,
   },
   preloadedState: reHydrateStore(),
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(localStorageMiddleware),
+    getDefaultMiddleware().concat(middleware),
 });
-
