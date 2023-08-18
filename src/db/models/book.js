@@ -9,11 +9,11 @@ export default class Book {
     return await db.book.add(book);
   }
 
-  static async updateBook(book) {
-    return await db.book.put(book);
+  static async updateBook(id, book) {
+    return await db.book.update(id, book);
   }
 
   static async deleteBook(id) {
-    return await db.book.where({ id }).put({ isDeleted: true });
+    return await db.book.update(id, { isDeleted: true });
   }
 }

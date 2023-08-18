@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
 import { confirmPopup } from "primereact/confirmpopup";
-import { v4 as uuidv4 } from "uuid";
 import { booklistActions } from "features/booklist/booklistSlice";
+import Book from "db/models/book";
 
 const initialBook = {
   id: "",
@@ -26,11 +26,32 @@ export default () => {
     e.preventDefault();
     setLoading(true);
     if (isEdit) {
-      dispatch(booklistActions.updateBook(book));
-      enqueueSnackbar("Book Updated Successfully", { variant: "success" });
+      const _book = { ...book };
+      const id = _book.id;
+      delete _book.id;
+
+      Book.updateBook(id, _book)
+        .then((_) => {
+          dispatch(booklistActions.updateBook({ id, ..._book }));
+          enqueueSnackbar("Book Updated Successfully", { variant: "success" });
+        })
+        .catch((err) => {
+          console.log(err);
+          enqueueSnackbar("Book Updated Failed", { variant: "error" });
+        });
     } else {
-      dispatch(booklistActions.addBook({ ...book, id: uuidv4() }));
-      enqueueSnackbar("Book Added Successfully", { variant: "success" });
+      const _book = { ...book };
+      delete _book.id;
+      Book.addBook(book)
+        .then((id) => {
+          console.log(id);
+          dispatch(booklistActions.addBook({ ..._book, id: id }));
+          enqueueSnackbar("Book Added Successfully", { variant: "success" });
+        })
+        .catch((err) => {
+          console.log(err);
+          enqueueSnackbar("Book Added Failed", { variant: "error" });
+        });
     }
     setLoading(false);
     onHide();
@@ -62,8 +83,17 @@ export default () => {
       message: "Are you sure you want to proceed?",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        dispatch(booklistActions.deleteBook({ id }));
-        enqueueSnackbar("Book Deleted Successfully", { variant: "success" });
+        Book.deleteBook(id)
+          .then((_) => {
+            dispatch(booklistActions.deleteBook({ id }));
+            enqueueSnackbar("Book Deleted Successfully", {
+              variant: "success",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            enqueueSnackbar("Book Deleted Failed", { variant: "error" });
+          });
       },
     });
   };
