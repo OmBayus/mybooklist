@@ -22,6 +22,7 @@ export default () => {
   const onChangeFilterStatus = (e) => {
     setFilterStatus(e.value);
     const _filteredBooks = filterBooks(e.value);
+    setSearchText("");
     setFilteredBooks(_filteredBooks);
   };
 
@@ -33,7 +34,12 @@ export default () => {
       return;
     }
     const _filteredBooksBySearch = _filteredBooks.filter((book) =>
-      book.name.toLowerCase().includes(e.target.value.toLowerCase())
+      Object.values(book).some((value) => {
+        if (typeof value === "string") {
+          return value.toLowerCase().includes(e.target.value.toLowerCase());
+        }
+        return false;
+      })
     );
     setFilteredBooks(_filteredBooksBySearch);
   };
