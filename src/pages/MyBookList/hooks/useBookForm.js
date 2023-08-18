@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
 import { confirmPopup } from "primereact/confirmpopup";
-const { booklistActions } = require("features/booklist/booklistSlice");
+import { v4 as uuidv4 } from "uuid";
+import { booklistActions } from "features/booklist/booklistSlice";
 
 const initialBook = {
   id: "",
@@ -28,7 +29,7 @@ export default () => {
       dispatch(booklistActions.updateBook(book));
       enqueueSnackbar("Book Updated Successfully", { variant: "success" });
     } else {
-      dispatch(booklistActions.addBook(book));
+      dispatch(booklistActions.addBook({ ...book, id: uuidv4() }));
       enqueueSnackbar("Book Added Successfully", { variant: "success" });
     }
     setLoading(false);
@@ -61,7 +62,7 @@ export default () => {
       message: "Are you sure you want to proceed?",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        dispatch(booklistActions.deleteBook(id));
+        dispatch(booklistActions.deleteBook({ id }));
         enqueueSnackbar("Book Deleted Successfully", { variant: "success" });
       },
     });
