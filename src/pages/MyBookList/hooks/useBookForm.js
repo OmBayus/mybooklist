@@ -42,7 +42,7 @@ export default () => {
     } else {
       const _book = { ...book };
       delete _book.id;
-      Book.addBook(book)
+      Book.addBook(_book)
         .then((id) => {
           console.log(id);
           dispatch(booklistActions.addBook({ ..._book, id: id }));

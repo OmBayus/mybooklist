@@ -18,6 +18,10 @@ export const booklistSlice = createSlice({
     ],
   },
   reducers: {
+    setBooklist: (state, action) => {
+      state.name = action.payload.name;
+      state.books = action.payload.books;
+    },
     setBooks: (state, action) => {
       state.books = action.payload.books;
     },
