@@ -9,11 +9,11 @@ export default ({
   submitLabel = "",
   headerText,
   showFooter = true,
-  loading=false,
-  showDia=true,
-  closable=false,
-  onHide=()=>{}
-
+  loading = false,
+  showDia = true,
+  closable = false,
+  onHide = () => {},
+  isForm = false,
 }) => {
   const footerContent = (
     <div>
@@ -35,7 +35,11 @@ export default ({
       onHide={onHide}
       className="w-11 md:w-6"
     >
-      <div style={{ margin: "10px", padding: "10px" }}>{children}</div>
+      {isForm ? (<form onSubmit={submit}>
+        <div style={{ margin: "10px", padding: "10px" }}>{children}</div>
+      </form>
+      ) : (<div style={{ margin: "10px", padding: "10px" }}>{children}</div>)}
+      
     </Dialog>
   );
 };

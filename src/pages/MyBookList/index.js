@@ -43,6 +43,7 @@ export default () => {
         loading={loading}
         closable
         onHide={onHide}
+        isForm
       >
         <BookForm book={book} onChangeForm={onChangeForm} />
       </Dia>
