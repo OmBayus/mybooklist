@@ -9,9 +9,9 @@ const ErrorPage = () => {
   return (
     <Error>
       <div id="error">Error</div>
-      <div class="error-num">
+      <div className="error-num">
         400
-        <div class="error-num__clip">400</div>
+        <div className="error-num__clip">400</div>
       </div>
       <p id="desc">Uh oh, there seems to be a problem.</p>
       <p>

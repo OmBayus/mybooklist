@@ -13,6 +13,7 @@ export default () => {
       headerText={content.dialog.header}
       submitLabel={content.dialog.submitLabel}
       loading={loading}
+      isForm
     >
       <div className="field col-12">
         <h5 className="required" style={{ marginBottom: "0.5em" }}>
@@ -20,6 +21,7 @@ export default () => {
         </h5>
         <InputText value={name} onChange={onChange} style={{ width: "100%" }} />
       </div>
+      <input type="submit" className="hidden" /> 
     </Dia>
   );
 };

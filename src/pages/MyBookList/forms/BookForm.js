@@ -9,48 +9,48 @@ import statusOptions from "../constants/status.options";
 export default ({ book, onChangeForm }) => {
   return (
     <div>
-      <div>
-        <label htmlFor="name" className="block text-900 font-medium mb-2">
-          Name
-        </label>
-        <InputText
-          id="name"
-          name="name"
-          type="text"
-          placeholder="Name"
-          className="w-full mb-3"
-          onChange={onChangeForm}
-          value={book.name}
-        />
+      <label htmlFor="name" className="block text-900 font-medium mb-2">
+        Name
+      </label>
+      <InputText
+        id="name"
+        name="name"
+        type="text"
+        placeholder="Name"
+        className="w-full mb-3"
+        onChange={onChangeForm}
+        value={book.name}
+      />
 
-        <label htmlFor="author" className="block text-900 font-medium mb-2">
-          Author
-        </label>
-        <InputText
-          id="author"
-          name="author"
-          type="text"
-          placeholder="Author"
-          className="w-full mb-3"
-          onChange={onChangeForm}
-          value={book.author}
-        />
+      <label htmlFor="author" className="block text-900 font-medium mb-2">
+        Author
+      </label>
+      <InputText
+        id="author"
+        name="author"
+        type="text"
+        placeholder="Author"
+        className="w-full mb-3"
+        onChange={onChangeForm}
+        value={book.author}
+      />
 
-        <label htmlFor="status" className="block text-900 font-medium mb-2">
-          Status
-        </label>
-        <Dropdown
-          id="status"
-          options={statusOptions}
-          placeholder="Select a Status"
-          className="w-full mb-3"
-          onChange={(e) =>
-            onChangeForm({ target: { name: "status", value: e.value } })
-          }
-          value={book.status}
-        />
+      <label htmlFor="status" className="block text-900 font-medium mb-2">
+        Status
+      </label>
+      <Dropdown
+        id="status"
+        options={statusOptions}
+        placeholder="Select a Status"
+        className="w-full mb-3"
+        onChange={(e) =>
+          onChangeForm({ target: { name: "status", value: e.value } })
+        }
+        value={book.status}
+      />
 
-        {book.status === "done" && <>
+      {book.status === "done" && (
+        <>
           <label htmlFor="rate" className="block text-900 font-medium mb-2">
             Rate
           </label>
@@ -75,8 +75,9 @@ export default ({ book, onChangeForm }) => {
             onChange={onChangeForm}
             value={book.review}
           />
-        </>}
-      </div>
+        </>
+      )}
+      <input type="submit" className="hidden" />
     </div>
   );
 };
